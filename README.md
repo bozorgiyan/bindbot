@@ -4,7 +4,7 @@ But now you can easily host a single site.
 ## Install
 ##### CentOS
     sudo yum install git -y
-    git clone https://github.com/bozorgiyan/bindbot.git
+    git clone https://gitlab.com/bozorgiyan/bindbot.git
     cd autobind
     chmod +x setup.sh
     ./setup.sh
