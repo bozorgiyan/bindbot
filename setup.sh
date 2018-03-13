@@ -44,10 +44,10 @@ echo -e "${BLUE}" ; cat includes/textpic ; echo -e "${NC}"
 #maindomain
     read -p "Enter your domain name without www: " userdomain
     read -p "ok... and enter a ip for it: " userip
-    sudo sed -i -e 's/domainv/$userdomain/g' /etc/named.conf
+    sudo sed -i -e "s/domainv/$userdomain/g" /etc/named.conf
     sudo cp includes/examplezone /var/named/$userdomain
-    sudo sed -i -e 's/domainv/$userdomain/g' /var/named/$userdomain
-    sudo sed -i -e 's/ipv/$userip/g' /var/named/$userdomain
+    sudo sed -i -e "s/domainv/$userdomain/g" /var/named/$userdomain
+    sudo sed -i -e "s/ipv/$userip/g" /var/named/$userdomain
     sudo systemctl enable named
     sudo systemctl restart named
 echo -e "${BLUE}Install finished!${NC}"
