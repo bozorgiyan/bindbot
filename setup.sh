@@ -5,19 +5,23 @@ NC='\033[0m'
 
 clear
 echo -e "${BLUE}" ; cat includes/textpic ; echo -e "${NC}"
+sleep 3
 
-echo "1.Ubuntu"
-echo "2.CentOS"
-echo "3.Others"
-read -p "Enter Your OS number from list: " useros
-if [ "$useros" = "1" ]
-then
-chmod +x ubuntu.sh
-./ubuntu.sh
-elif [ "$useros" = "2" ]
-then
-chmod +x centos.sh
+check_distro=0
+#Checking if the distro is debianbase / archbase / redhatbase/ openSUSEbae and running the correct script
+if pacman -Q &> /dev/null; then # Check Arch
+    sudo chmod +x ./traktor_arch.sh
+    ./traktor_arch.sh # Run Traktor Arch
+elif apt list --installed &> /dev/null; then # Check Debian
+    sudo chmod +x ./ubuntu.sh
+    ./ubuntu.sh # Run Traktor Debian
+elif dnf list &> /dev/null; then
+    sudo chmod +x ./centos.sh
+    ./centos.sh# Run Traktor Fedora
+elif zypper search i+ &> /dev/null; then
+    sudo chmod +x ./traktor_opensuse.sh
+    ./traktor_opensuse.sh # Run Traktor OpenSUSE
 else
-echo "Sorry we can not support your OS now..."
-exit
+    echo "Your distro is neither archbase nor debianbase nor redhatbase nor susebase So, The script is not going to work in your distro."
+    check_distro="1"
 fi
