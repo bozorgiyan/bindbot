@@ -1,4 +1,4 @@
-# BindBot 1.0 Beta
+# BindBot 1.2 Beta
 Maybe it's up to you to install a DNS server, but it's hard to install and set up.
 But now you can easily host a single site.
 ### Available for:
