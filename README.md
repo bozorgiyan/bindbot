@@ -7,7 +7,7 @@ But now you can easily host a single site.
 
 ## Install
     git clone https://gitlab.com/bozorgiyan/bindbot.git
-    cd autobind
+    cd bindbot
     chmod +x setup.sh
     ./setup.sh
 ### Github
