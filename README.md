@@ -6,7 +6,6 @@ But now you can easily host a single site.
 - [x] Ubuntu
 
 ## Install
-    sudo yum install git -y
     git clone https://gitlab.com/bozorgiyan/bindbot.git
     cd autobind
     chmod +x setup.sh
