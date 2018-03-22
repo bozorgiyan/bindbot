@@ -22,7 +22,7 @@
 	sudo ufw status verbose
 
 #install packages
-    sudo apt install bind* -y
+    sudo apt install bind9 -y
 
 #backup
     sudo mv /etc/bind backups
