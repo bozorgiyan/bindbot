@@ -1,12 +1,12 @@
 #!/bin/bash
 #checkping
-cmd=`dig ubuntu.com | grep "ANSWER: 1"`
-    if [[ "$cmd" == *"ANSWER: 1"* ]]; then
-    echo "DNS settings is ok"  
-    else
-    echo "writing DNS settings"
-    echo "nameserver 8.8.8.8" | sudo tee -a /etc/resolv.conf
-    fi    
+#cmd=`dig ubuntu.com | grep "ANSWER: 1"`
+#    if [[ "$cmd" == *"ANSWER: 1"* ]]; then
+#    echo "DNS settings is ok"  
+#    else
+#    echo "writing DNS settings"
+#    echo "nameserver 8.8.8.8" | sudo tee -a /etc/resolv.conf
+#    fi    
 
 #open ports    
     sudo firewall-cmd --zone=public --add-port=53/tcp --permanent
