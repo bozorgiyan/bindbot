@@ -12,7 +12,7 @@ sleep 3
 if apt list --installed &> /dev/null; then # Check Debian
     sudo chmod +x ./ubuntu.sh
     ./ubuntu.sh # Run bindbot Debian
-elif dnf list &> /dev/null; then
+elif yum list installed &> /dev/null; then
     sudo chmod +x ./centos.sh
     ./centos.sh # Run bindbot Fedora
 else
