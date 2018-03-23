@@ -1,21 +1,13 @@
 #!/bin/bash
-#check os
-    read -p "You are using CentOS. is that so?[Y/n]: " userif
-    if [ "$userif" = Y ] || [ "$userif" = y ] ; then
-    echo
-    else
-    echo -e "${RED}Sorry... it is just for CentOS${NC}"
-    exit
-    fi
-
 #checkping
-    if [ "`ping -c 1 google.com`" ]
-    then
+cmd=`dig ubuntu.com | grep "ANSWER: 1"`
+    if [ "$cmd" == "1"; thencmd=`dig ubuntu.com | grep "ANSWER: 1"`
+    if [[ "$cmd" == *"ANSWER: 1"* ]]; then
     echo DNS settings is ok  
     else
     echo writing DNS settings
     echo "nameserver 8.8.8.8" | sudo tee -a /etc/resolv.conf
-    fi
+    fi    
 
 #open ports    
     sudo firewall-cmd --zone=public --add-port=53/tcp --permanent
