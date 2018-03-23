@@ -1,11 +1,10 @@
 #!/bin/bash
 #checkping
 cmd=`dig ubuntu.com | grep "ANSWER: 1"`
-    if [ "$cmd" == "1"; thencmd=`dig ubuntu.com | grep "ANSWER: 1"`
     if [[ "$cmd" == *"ANSWER: 1"* ]]; then
-    echo DNS settings is ok  
+    echo "DNS settings is ok"  
     else
-    echo writing DNS settings
+    echo "writing DNS settings"
     echo "nameserver 8.8.8.8" | sudo tee -a /etc/resolv.conf
     fi    
 
