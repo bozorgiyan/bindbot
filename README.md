@@ -5,8 +5,6 @@ But now you can easily host a single site.
 - [x] CentOS 6.x and 7.x
 - [x] Ubuntu
 - [x] Debian
-- [x] RHEL
-- [x] Fedora
 
 ## Install
     git clone https://gitlab.com/bozorgiyan/bindbot.git
