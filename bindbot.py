@@ -12,11 +12,14 @@ def installDebian():
     # Save config path
     os.system("sudo echo '/etc/bind/' | sudo tee -a /usr/share/bindbot/.etc > /dev/null")
     # Open ports
-    os.system("sudo ufw allow dns > /dev/null")
-    os.system("sudo iptables -A OUTPUT -d DNSServer -p udp -dport 53 -j ACCEPT > /dev/null")
-    os.system("sudo iptables -A INPUT -s DNSServer -p udp -sport 53 -j ACCEPT > /dev/null")
-    os.system("sudo iptables -A OUTPUT -d DNSServer -p tcp -dport 53 -j ACCEPT > /dev/null")
-    os.system("sudo iptables -A INPUT -s DNSServer -p tcp -sport 53 -j ACCEPT > /dev/null")
+    os.system("sudo ufw allow 53/tcp > /dev/null")
+    os.system("sudo ufw allow 53/udp > /dev/null")
+    os.system("sudo iptables --append INPUT --match tcp --protocol tcp --sport 53 --jump ACCEPT > /dev/null")
+    os.system("sudo iptables --append OUTPUT --match tcp --protocol tcp --sport 53 --jump ACCEPT > /dev/null")
+    os.system("sudo iptables --append INPUT --match udp --protocol udp --sport 53 --jump ACCEPT > /dev/null")
+    os.system("sudo iptables --append OUTPUT --match udp --protocol udp --sport 53 --jump ACCEPT > /dev/null")
+    # Enable service
+    os.system("sudo systemctl enable bind9 > /dev/null")
 
 def installBind9():
     debian = os.path.exists("/bin/apt")
