@@ -32,7 +32,7 @@ def installDebian():
     os.system("sudo systemctl enable bind9 > /dev/null 2>&1")
 
     print(bcolors.OKGREEN + "Bind9 installation finished." + bcolors.ENDC)
-def installCentOS():
+def installRedhat():
         # Install packages
         os.system("sudo yum install bind bind-utils -y > /dev/null 2>&1")
         # Creat bind9 install verify file
@@ -59,7 +59,7 @@ def installBind9():
         installDebian()
     elif redhat:
         ## Install Redhat
-        installCentOS()
+        installRedhat()
     else:
         print("BindBot dosn't support your distribution.")
         os._exit(0)
