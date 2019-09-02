@@ -32,7 +32,25 @@ def installDebian():
     os.system("sudo systemctl enable bind9 > /dev/null 2>&1")
 
     print(bcolors.OKGREEN + "Bind9 installation finished." + bcolors.ENDC)
+def installCentOS():
+        # Install packages
+        os.system("sudo yum install bind bind-utils -y > /dev/null 2>&1")
+        # Creat bind9 install verify file
+        os.system("sudo touch /usr/share/bindbot/.bind9")
+        # Save service name
+        os.system("sudo echo 'named' | sudo tee -a /usr/share/bindbot/.service > /dev/null 2>&1")
+        # Save config path
+        os.system("sudo echo '/var/named/' | sudo tee -a /usr/share/bindbot/.etc > /dev/null 2>&1")
+        # Open ports
+        print(bcolors.BOLD + "Opening ports..." + bcolors.ENDC)
+        os.system("sudo firewall-cmd --zone=public --add-port=53/tcp --permanent > /dev/null 2>&1")
+        os.system("sudo firewall-cmd --zone=public --add-port=53/tcp --permanent > /dev/null 2>&1")
+        os.system("sudo firewall-cmd --reload > /dev/null 2>&1")
+        # Enable service
+        print(bcolors.BOLD + "Enable named service..." + bcolors.ENDC)
+        os.system("sudo systemctl enable named > /dev/null 2>&1")
 
+        print(bcolors.OKGREEN + "Bind9 installation finished." + bcolors.ENDC)
 def installBind9():
     debian = os.path.exists("/bin/apt")
     redhat = os.path.exists("/bin/yum")
@@ -41,7 +59,7 @@ def installBind9():
         installDebian()
     elif redhat:
         ## Install Redhat
-        pass
+        installCentOS()
     else:
         print("BindBot dosn't support your distribution.")
         os._exit(0)
