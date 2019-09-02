@@ -1,6 +1,14 @@
 #!/usr/bin/env python3
 import os
-
+class bcolors:
+    HEADER = '\033[95m'
+    OKBLUE = '\033[94m'
+    OKGREEN = '\033[92m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    ENDC = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
 ## Functions
 def installDebian():
     # Install packages
@@ -12,7 +20,7 @@ def installDebian():
     # Save config path
     os.system("sudo echo '/etc/bind/' | sudo tee -a /usr/share/bindbot/.etc > /dev/null 2>&1")
     # Open ports
-    print("Opening ports...")
+    print(bcolors.BOLD + "Opening ports..." + bcolors.ENDC)
     os.system("sudo ufw allow 53/tcp > /dev/null 2>&1")
     os.system("sudo ufw allow 53/udp > /dev/null 2>&1")
     os.system("sudo iptables --append INPUT --match tcp --protocol tcp --sport 53 --jump ACCEPT > /dev/null 2>&1")
@@ -20,10 +28,10 @@ def installDebian():
     os.system("sudo iptables --append INPUT --match udp --protocol udp --sport 53 --jump ACCEPT > /dev/null 2>&1")
     os.system("sudo iptables --append OUTPUT --match udp --protocol udp --sport 53 --jump ACCEPT > /dev/null 2>&1")
     # Enable service
-    print("Enable bind9 service...")
+    print(bcolors.BOLD + "Enable bind9 service..." + bcolors.ENDC)
     os.system("sudo systemctl enable bind9 > /dev/null 2>&1")
 
-    print("Bind9 installation finished.")
+    print(bcolors.OKGREEN + "Bind9 installation finished." + bcolors.ENDC)
 
 def installBind9():
     debian = os.path.exists("/bin/apt")
@@ -39,11 +47,11 @@ def installBind9():
         os._exit(0)
 
 ## Start
-print("BindBot 2.0 Beta")
+print(bcolors.HEADER + "BindBot 2.0 Beta" + bcolors.ENDC)
 
 # Check bind9 installed
 installed = os.path.exists("/usr/share/bindbot/.bind9")
 if (installed == False):
-    print("Installing bind9...")
+    print(bcolors.BOLD + "Installing bind9..." + bcolors.ENDC)
     ##install bind9
     installBind9()
