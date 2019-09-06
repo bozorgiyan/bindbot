@@ -63,13 +63,24 @@ def installBind9():
     else:
         print("BindBot dosn't support your distribution.")
         os._exit(0)
-
+def mainMenu():
+    print("1.Add zone")
+    print("2.Delete zone")
+    print("3.Exit")
+    input = raw_input("Enter number: ")
+    if input == "1":
+        pass
+    elif input == "2":
+        pass
+    else:
+        os._exit(0)
 ## Start
 # Check root
 user = os.getenv("SUDO_USER")
 if user is None:
     print(bcolors.FAIL + "This program need sudo."+ bcolors.ENDC)
     exit()
+os.system("clear")
 print(bcolors.HEADER + "BindBot 2.0 Beta" + bcolors.ENDC)
 # Check bind9 installed
 installed = os.path.exists("/usr/share/bindbot/.bind9")
@@ -77,3 +88,4 @@ if (installed == False):
     print(bcolors.BOLD + "Installing bind9..." + bcolors.ENDC)
     ##install bind9
     installBind9()
+mainMenu()
