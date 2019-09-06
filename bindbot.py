@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 import os
 class bcolors:
     HEADER = '\033[95m'
