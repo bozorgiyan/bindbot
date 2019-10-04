@@ -27,7 +27,12 @@
 
 #maindomain
     read -p "Enter your domain name without www: " userdomain
-    read -p "ok... and enter a ip for it: " userip
+    autoip=$(hostname -I | cut -d' ' -f1)
+    read -p "Ok... and enter a ip for it (default $autoip): " userip
+    if [ "$userip" = "" ]
+    then
+    userip=$autoip
+    fi
     sudo sed -i -e "s/domainv/$userdomain/g" /etc/named.conf
     sudo cp includes/examplezone /var/named/$userdomain
     sudo sed -i -e "s/domainv/$userdomain/g" /var/named/$userdomain

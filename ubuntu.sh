@@ -19,7 +19,12 @@ cmd=`dig ubuntu.com | grep "ANSWER: 1"`
 
 #maindomain
     read -p "Enter your domain name without www: " userdomain
-    read -p "ok... and enter a ip for it: " userip
+    autoip=$(hostname -I | cut -d' ' -f1)
+    read -p "Ok... and enter a ip for it (default $autoip): " userip
+    if [ "$userip" = "" ]
+    then
+    userip=$autoip
+    fi
     sudo sed -i -e "s/domainv/$userdomain/g" /etc/bind/named.conf.default-zones
     sudo cp includes/examplezone /etc/bind/$userdomain
     sudo sed -i -e "s/domainv/$userdomain/g" /etc/bind/$userdomain
