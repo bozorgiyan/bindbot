@@ -11,5 +11,3 @@ But now you can easily host a single site.
     cd bindbot
     chmod +x setup.sh
     ./setup.sh
-### Github
-[See On Github](https://github.com/bozorgiyan/bindbot)
