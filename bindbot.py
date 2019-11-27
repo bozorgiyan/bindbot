@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 import os
+import commands
 class bcolors:
     HEADER = '\033[95m'
     OKBLUE = '\033[94m'
@@ -13,12 +14,16 @@ class bcolors:
 def installDebian():
     # Install packages
     os.system("apt install bind9 -y > /dev/null 2>&1")
+    # Creat bindbot dir
+    os.system("mkdir /usr/share/bindbot")
     # Creat bind9 install verify file
     os.system("touch /usr/share/bindbot/.bind9")
     # Save service name
     os.system("echo 'bind9' | sudo tee -a /usr/share/bindbot/.service > /dev/null 2>&1")
     # Save config path
     os.system("echo '/etc/bind/' | sudo tee -a /usr/share/bindbot/.etc > /dev/null 2>&1")
+    # Creat bindbot at config path
+    os.system("mkdir /etc/bind/bindbot")
     # Open ports
     print(bcolors.BOLD + "Opening ports..." + bcolors.ENDC)
     os.system("ufw allow 53/tcp > /dev/null 2>&1")
@@ -35,6 +40,8 @@ def installDebian():
 def installRedhat():
         # Install packages
         os.system("yum install bind bind-utils -y > /dev/null 2>&1")
+        # Creat bindbot dir
+        os.system("mkdir /usr/share/bindbot")
         # Creat bind9 install verify file
         os.system("touch /usr/share/bindbot/.bind9")
         # Save service name
@@ -63,13 +70,27 @@ def installBind9():
     else:
         print("BindBot dosn't support your distribution.")
         os._exit(0)
+
+# Add zone Functions
+def addZone():
+    configdir = open('/usr/share/bindbot/.etc', 'r').read()
+    service = open('/usr/share/bindbot/.service', 'r').read()
+    domain = raw_input("Enter domain name whitout WWW(ex: Site.com): ")
+    ip = raw_input("Enter an IP to this domain: ")
+    v = raw_input("'"+domain+"' points to '"+ip+"' is correct(y or n): ")
+    if (v != "y" and v != "Y"):
+        print(bcolors.FAIL+"Process canceled by user."+bcolors.ENDC)
+        os._exit(0)
+
+
 def mainMenu():
     print("1.Add zone")
     print("2.Delete zone")
     print("3.Exit")
     input = raw_input("Enter number: ")
     if input == "1":
-        pass
+        os.system("clear")
+        addZone()
     elif input == "2":
         pass
     else:
