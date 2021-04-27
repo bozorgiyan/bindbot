@@ -7,7 +7,7 @@ But now you can easily host a single site.
 - [x] Debian
 
 ## Install
-    git clone https://gitlab.com/bozorgiyan/bindbot.git
+    git clone https://github.com/bozorgiyan/bindbot.git
     cd bindbot
     chmod +x setup.sh
     ./setup.sh
